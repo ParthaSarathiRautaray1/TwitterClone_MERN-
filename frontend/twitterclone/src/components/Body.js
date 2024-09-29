@@ -1,23 +1,23 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from './Login';
 import Home from './Home';
 import Feed from './Feed';
 import Profile from './Profile';
 
-function Body() {
+const Body = () => {
     const appRouter = createBrowserRouter([
         {
             path: "/",
-            element: <Home />,
+            element: <Home/>,
             children:[
                 {
                     path:"/",
-                    element:<Feed />
+                    element:<Feed/>
                 },
                 {
-                    path:"/profile",
-                    element:<Profile />
+                    path:"/profile/:id",
+                    element:<Profile/>
                 }
             ]
         },
@@ -25,13 +25,12 @@ function Body() {
             path: "/login",
             element: <Login />
         }
-    ]);
-
+    ])
     return (
         <div>
             <RouterProvider router={appRouter} />
         </div>
-    );
+    )
 }
 
-export default Body;
+export default Body

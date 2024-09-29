@@ -1,35 +1,43 @@
 import React from 'react'
 import { CiSearch } from "react-icons/ci";
-import Avatar from 'react-avatar';
+import Avatar from "react-avatar";
+import { Link } from 'react-router-dom';
 
-function RightSidebar() {
+const RightSidebar = ({ otherUsers }) => {
+
   return (
-    <div className='items-center w-[25%]'>
-      <div className='p-2 bg-gray-100 text-gray-500 rounded-full outline-none flex items-center'>
-        <CiSearch size={"20px"}/>
-        <input className='bg-transparent outline-none px-2' type='text'  placeholder="Search"/>
+    <div className='w-[25%]'>
+      <div className='flex items-center p-2 bg-gray-100 rounded-full outline-none w-full'>
+        <CiSearch size="20px" />
+        <input type="text" className='bg-transparent outline-none px-2' placeholder='Search' />
       </div>
       <div className='p-4 bg-gray-100 rounded-2xl my-4'>
-        <h1 className='font-bold text-lg '>Who to follow</h1>
-        <div className='flex items-center justify-between my-3'>
-          <div className='flex'>
-          <Avatar src="https://media.licdn.com/dms/image/v2/D4E03AQGWSFcFu63QTQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1721309383320?e=1732752000&v=beta&t=N1h4sKCP--D2CHhr8L31lICRRGjvDEvQVnitjc2c1js" size="40" round={true} />
-          <div className='ml-2'>
-            <h1 className='font-semibold'>
-              pinu
-            </h1>
-            <p className='text-sm'>@pinumernstack</p>
-          </div>
-          </div>
-          <div>
+        <h1 className='font-bold text-lg'>Who to follow</h1>
+        {
+          otherUsers?.map((user) => {
+            return (
+              <div key={user?._id} className='flex items-center justify-between my-3'>
+                <div className='flex'>
+                  <div>
+                    <Avatar src="https://img.freepik.com/premium-vector/twitter-new-logo-twitter-icons-new-twitter-logo-x-2023_929078-218.jpg" size="40" round={true} />
+                  </div>
+                  <div className='ml-2'>
+                    <h1 className='font-bold'>{user?.name}</h1>
+                    <p className='text-sm'>{`@${user?.username}`}</p>
+                  </div>
+                </div>
+                <div>
+                  <Link to={`/profile/${user?._id}`}>
+                    <button className='px-4 py-1 bg-black text-white rounded-full'>Profile</button>
+                  </Link>
+                </div>
+              </div>
+            )
+          })
+        }
 
-            <button className='px-4 py-1 bg-black text-white rounded-full'>Profile</button>
-          </div>
-
-        </div>
 
 
-        
       </div>
     </div>
   )
