@@ -34,10 +34,10 @@ app.use("/api/v1/user",userRoute);
 app.use("/api/v1/tweet", tweetRoute);
 
 
-app.use(express.static(path.join(__dirname, "/frontend/dist"))) 
+app.use(express.static(path.join(__dirname, "frontend", "tweeterclone", "build"))) 
 
 app.get('*' , (_,res) =>{
-    res.sendFile(path.resolve(__dirname,"frontend", "dist" , "index.html"))
+    res.sendFile(path.resolve(__dirname,"frontend", "tweeterclone", "build", "index.html"))
 })
 
 app.listen(process.env.PORT,() => {
